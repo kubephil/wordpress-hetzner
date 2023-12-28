@@ -1,1 +1,4 @@
 .DS_Store
+ansible/inventory.ini
+ansible/.env
+ansible/vars.yml
