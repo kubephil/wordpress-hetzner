@@ -1,0 +1,29 @@
+- hosts: all
+  remote_user: admin
+  become: true
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Create Deployment Directory
+      ansible.builtin.file:
+        path: /home/admin/deployment
+        state: directory
+        owner: admin
+        group: admin
+        mode: '0755'
+    - name: Create letsencrypt Directory
+      ansible.builtin.file:
+        path: /home/admin/deployment/letsencrypt
+        state: directory
+        owner: admin
+        group: admin
+        mode: '0755'
+    - name: Deploy Docker Compose File
+      ansible.builtin.copy:
+        src: docker-compose.yaml
+        dest: /home/admin/deployment/docker-compose.yml
+    - name: Run Docker Compose
+      ansible.builtin.shell:
+        cmd: "DOMAIN_NAME={{ domain_name }} ACME_EMAIL={{ acme_email }} docker compose up -d"
+        chdir: /home/admin/deployment
+

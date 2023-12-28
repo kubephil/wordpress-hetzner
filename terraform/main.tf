@@ -49,13 +49,7 @@ resource "hetznerdns_record" "record" {
     value = hcloud_server.server.ipv4_address
     ttl = 3600
 }
-
-
-output "ipv4_address" {
-    value = hcloud_server.server.ipv4_address
+resource "local_file" "ansible_inventory_file" {
+  content  = "[all]\n${hcloud_server.server.name} ansible_host=${hcloud_server.server.ipv4_address}"
+  filename = "${path.module}/../ansible/inventory.ini"
 }
-
-output "ssh_command" {
-    value = "ssh admin@${hcloud_server.server.ipv4_address}"
-}
-

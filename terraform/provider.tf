@@ -8,6 +8,10 @@ terraform {
             source = "hetznercloud/hcloud"
             version = "1.44.1"
         }
+        local = {
+            source = "hashicorp/local"
+            version = "2.4.1"
+        }
 
     }
     required_version = ">= 1.0.0"
@@ -19,5 +23,8 @@ provider "hcloud" {
 
 provider "hetznerdns" {
     apitoken = var.hetznerdns_token
+  
+}
+provider "local" {
   
 }
