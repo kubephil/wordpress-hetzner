@@ -1,0 +1,20 @@
+#cloud-config
+users:
+  - name: admin
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo, docker
+    shell: /bin/bash
+
+runcmd:
+  - apt-get update
+  - apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - apt-get update
+  - apt-get install -y docker-ce
+  - usermod -aG docker admin
+  - mkdir -p /home/admin/.ssh
+  - cp /root/.ssh/authorized_keys /home/admin/.ssh/
+  - chown -R admin:admin /home/admin/.ssh
+  - chmod 700 /home/admin/.ssh
+  - chmod 600 /home/admin/.ssh/authorized_keys

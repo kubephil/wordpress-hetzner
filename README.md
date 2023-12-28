@@ -12,7 +12,7 @@ Before you begin, ensure you have the following:
 Follow these steps to set up your environment with Terraform:
 
 1. **Clone the Repository:**
-   - Use `git clone [repository-url]` to clone the repository to your local machine.
+   - Use `git clone git@github.com:kubephil/wordpress-hetzner.git` to clone the repository to your local machine.
    - Navigate to the Terraform directory within the cloned repository.
 
 2. **Configure Terraform Variables:**

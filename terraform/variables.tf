@@ -51,3 +51,9 @@ variable "hostname" {
     description = "Hostname.The domain is added automatically added from the DNS Zone ID. e.g for server.mydomain.com you only provide 'server' here"
     default = "server"
 }
+
+variable "enable_backups" {
+    type = bool
+    description = "Enable backups"
+    default = false
+}
