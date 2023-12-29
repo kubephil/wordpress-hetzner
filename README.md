@@ -42,10 +42,11 @@ Follow these steps to set up your environment with Terraform:
 Once the server is created. Follow these steps to deploy wordpress via ansible and docker-compose
 
 1. **Create ACME config File:**
-   - Navigate to the `ansible` directory and create a `vars.yml` file for the ACME config
+   - Navigate to the `ansible` directory and create a `vars.yml` file for the ACME config and db password
      ```
       domain_name: "yourdomain.com"
       acme_email: "yourfancy@example.com"
+      wordpress_db_password: "your-secure-db-password"
      ```
 2. **Run the playbook**
    - Execute the command `ansible-playbook -i inventory.ini playbook.yml`
@@ -57,3 +58,4 @@ Once the server is created. Follow these steps to deploy wordpress via ansible a
 - **Terraform Documentation:** For more detailed instructions on using Terraform, refer to the [Terraform Documentation](https://www.terraform.io/docs).
 - **Obtain the hcloud token:** The hcloud token is per project. Navigate to `https://console.hetzner.cloud/projects/<your-project>/security/tokens`  and create a read and write token
 - **Obtain the DNS token**: Navigate to the API tokens in [Hetzner DNS](https://dns.hetzner.com/settings/api-token). Note your domain needs to point to [Hetzner's Name servers](https://docs.hetzner.com/dns-console/dns/general/authoritative-name-servers).
+- **Apply and Teardown several times:** In case you teardown using terrafrom and reapply you might need to run `ssh-keygen -R <your-server-ip>`. This will remove it from the known_hosts.

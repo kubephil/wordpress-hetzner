@@ -29,7 +29,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: wordpress
     labels:
       - "traefik.enable=true"
@@ -41,6 +41,7 @@ services:
     depends_on:
       - db
     networks:
+      - db_network
       - web
 
   db:
@@ -49,11 +50,11 @@ services:
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress 
       MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress # You may change this password.
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
     networks:
-      - web
+      - db_network
 
 volumes:
   db_data:
@@ -63,3 +64,4 @@ networks:
   web:
     name: web
     driver: bridge
+  db_network:
