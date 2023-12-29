@@ -18,7 +18,7 @@ Follow these steps to set up your environment with Terraform:
 
 2. **Configure Terraform Variables:**
    - It's recommended to create a `terraform.tfvars` file for your variable definitions.
-   - Add the following variables to the file, replacing placeholders with your actual values:
+   - Add the following variables to the file, replacing placeholders with your actual values (see notes on how to obtain them):
      ```
      hcloud_token = "<your-hetzner-cloud-token>"
      hetznerdns_token = "<your-hetzner-dns-token>"
@@ -42,7 +42,7 @@ Follow these steps to set up your environment with Terraform:
 Once the server is created. Follow these steps to deploy wordpress via ansible and docker-compose
 
 1. **Create ACME config File:**
-   - Navigate to the `ansible` directory and create vars.yml file for the ACME config
+   - Navigate to the `ansible` directory and create a `vars.yml` file for the ACME config
      ```
       domain_name: "yourdomain.com"
       acme_email: "yourfancy@example.com"
@@ -55,3 +55,5 @@ Once the server is created. Follow these steps to deploy wordpress via ansible a
 ### Notes:
 
 - **Terraform Documentation:** For more detailed instructions on using Terraform, refer to the [Terraform Documentation](https://www.terraform.io/docs).
+- **Obtain the hcloud token:** The hcloud token is per project. Navigate to `https://console.hetzner.cloud/projects/<your-project>/security/tokens`  and create a read and write token
+- **Obtain the DNS token**: Navigate to the API tokens in [Hetzner DNS](https://dns.hetzner.com/settings/api-token). Note your domain needs to point to [Hetzner's Name servers](https://docs.hetzner.com/dns-console/dns/general/authoritative-name-servers).
